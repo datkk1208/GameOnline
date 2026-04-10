@@ -22,7 +22,8 @@ public class NetworkManager : MonoBehaviour
             GameMode = GameMode.Shared,
             SessionName = roomName,
             Scene = SceneRef.FromIndex(1),
-            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
+            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
+            ObjectProvider = gameObject.AddComponent<NetworkObjectPool>()
         });
         // Chat tự kết nối khi player spawn qua ChatNetworkBehaviour.Spawned()
     }
