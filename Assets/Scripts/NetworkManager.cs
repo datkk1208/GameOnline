@@ -1,6 +1,6 @@
-﻿using Fusion;
+using Fusion;
 using UnityEngine;
-using TMPro; // Dùng cho TextMeshPro
+using TMPro;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class NetworkManager : MonoBehaviour
         // 3. Kết nối vào Photon Cloud và tải GameScene
         await _runner.StartGame(new StartGameArgs()
         {
-           
-            GameMode = GameMode.Shared, // Chế độ Shared
-            SessionName = roomName,     // Tên phòng
-            Scene = SceneRef.FromIndex(1), // Tải GameScene (Index số 1 trong Build Settings)
+            GameMode = GameMode.Shared,
+            SessionName = roomName,
+            Scene = SceneRef.FromIndex(1),
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
+        // Chat tự kết nối khi player spawn qua ChatNetworkBehaviour.Spawned()
     }
 }

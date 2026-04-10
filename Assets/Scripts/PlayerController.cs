@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Fusion;
 
 public class PlayerMovement : NetworkBehaviour
@@ -21,6 +21,9 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!HasStateAuthority) return;
 
+        if (ChatUI.Instance != null && ChatUI.Instance.chatPanel != null && ChatUI.Instance.chatPanel.activeSelf)
+            return;
+
         // Bắt nút Space
         if (Input.GetKeyDown(KeyCode.Space) && _controller.isGrounded)
         {
@@ -31,6 +34,9 @@ public class PlayerMovement : NetworkBehaviour
     public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority) return;
+
+        if (ChatUI.Instance != null && ChatUI.Instance.chatPanel != null && ChatUI.Instance.chatPanel.activeSelf)
+            return;
 
         // 1. Trọng lực & Nhảy
         if (_controller.isGrounded)

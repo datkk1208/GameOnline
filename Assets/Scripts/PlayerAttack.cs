@@ -1,4 +1,4 @@
-﻿using Fusion;
+using Fusion;
 using UnityEngine;
 
 public class PlayerAttack : NetworkBehaviour
@@ -16,6 +16,13 @@ public class PlayerAttack : NetworkBehaviour
     private void Update()
     {
         if (!HasStateAuthority) return;
+
+        // Chặn đánh khi đang mở khung chat hoặc click vào UI
+        if (ChatUI.Instance != null && ChatUI.Instance.chatPanel != null && ChatUI.Instance.chatPanel.activeSelf)
+            return;
+            
+        if (UnityEngine.EventSystems.EventSystem.current != null && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            return;
 
         if (Input.GetMouseButtonDown(0))
         {
