@@ -1,4 +1,4 @@
-﻿using Fusion;
+using Fusion;
 using UnityEngine;
 
 public class Fireball : NetworkBehaviour
@@ -41,6 +41,16 @@ public class Fireball : NetworkBehaviour
             }
             else
             {
+                // Gọi trừ máu nếu trúng người chơi
+                if (hitNetObj != null)
+                {
+                    PlayerHealth hp = hitNetObj.GetComponent<PlayerHealth>();
+                    if (hp != null)
+                    {
+                        hp.RPC_TakeDamage(10f, Object.StateAuthority);
+                    }
+                }
+
                 // Trúng tường, trúng đất hoặc người chơi khác -> NỔ
                 RPC_ShowExplosion(hit.point);
                 Runner.Despawn(Object); // Hủy viên đạn

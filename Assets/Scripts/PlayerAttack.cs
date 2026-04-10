@@ -7,15 +7,20 @@ public class PlayerAttack : NetworkBehaviour
     public NetworkObject fireballPrefab;
     public Transform firePoint;
     private Animator _animator; // Thêm dòng này
+    private PlayerHealth _health;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>(); // Thêm dòng này
+        _health = GetComponent<PlayerHealth>();
     }
 
     private void Update()
     {
         if (!HasStateAuthority) return;
+
+        // Chặn đánh nếu nhân vật đã chết
+        if (_health != null && _health.IsDead) return;
 
         // Chặn đánh khi đang mở khung chat hoặc click vào UI
         if (ChatUI.Instance != null && ChatUI.Instance.chatPanel != null && ChatUI.Instance.chatPanel.activeSelf)

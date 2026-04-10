@@ -20,6 +20,7 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         if (!HasStateAuthority) return;
+        if (_controller != null && !_controller.enabled) return; // Khoá điều khiển khi đang chờ Hồi sinh
 
         if (ChatUI.Instance != null && ChatUI.Instance.chatPanel != null && ChatUI.Instance.chatPanel.activeSelf)
             return;
@@ -34,6 +35,7 @@ public class PlayerMovement : NetworkBehaviour
     public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority) return;
+        if (_controller != null && !_controller.enabled) return; // Khoá luôn di chuyển vật lý
 
         if (ChatUI.Instance != null && ChatUI.Instance.chatPanel != null && ChatUI.Instance.chatPanel.activeSelf)
             return;
