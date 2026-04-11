@@ -6,10 +6,11 @@ public class PlayerHealth : NetworkBehaviour
 {
     [Networked] public float Health { get; set; }
     [Networked] public int Score { get; set; }
-
     [Networked] public bool IsDead { get; set; }
 
+    public WorldSpaceHealthBar worldSpaceHealthBar; 
     private ChangeDetector _changeDetector;
+
     private CharacterController _controller;
     private Animator _animator;
 
@@ -19,7 +20,7 @@ public class PlayerHealth : NetworkBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public override void Spawned()
+   public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         
@@ -30,28 +31,46 @@ public class PlayerHealth : NetworkBehaviour
             IsDead = false;
         }
 
+        // Cập nhật UI 2D cá nhân (chỉ mình thấy)
         if (HasInputAuthority && HUDManager.Instance != null)
         {
             HUDManager.Instance.UpdateHealth(Health);
             HUDManager.Instance.UpdateScore(Score);
         }
+
+        // THÊM ĐOẠN NÀY: Cập nhật thanh máu 3D ngay khi spawn (ai cũng thấy)
+        if (worldSpaceHealthBar != null)
+        {
+            worldSpaceHealthBar.UpdateHealthBar(Health, 100f);
+        }
     }
 
     public override void Render()
     {
-        // Khi giá trị của Health hoặc Score thay đổi, cập nhật ngay lên HUD
         foreach (var change in _changeDetector.DetectChanges(this))
         {
             switch (change)
             {
                 case nameof(Health):
+                    // 1. Cập nhật UI màn hình của riêng người đó
                     if (HasInputAuthority && HUDManager.Instance != null)
                         HUDManager.Instance.UpdateHealth(Health);
+
+                    // 2. THÊM DÒNG NÀY: Cập nhật thanh máu 3D trên đầu cho TẤT CẢ mọi người cùng thấy
+                    if (worldSpaceHealthBar != null)
+                        worldSpaceHealthBar.UpdateHealthBar(Health, 100f);
                     break;
 
                 case nameof(Score):
                     if (HasInputAuthority && HUDManager.Instance != null)
                         HUDManager.Instance.UpdateScore(Score);
+                    break;
+
+                case nameof(IsDead):
+                    if (IsDead && HasInputAuthority && PlayFabManager.Instance != null)
+                    {
+                        PlayFabManager.Instance.SendLeaderboard(Score);
+                    }
                     break;
             }
         }

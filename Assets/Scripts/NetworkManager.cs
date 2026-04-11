@@ -11,10 +11,10 @@ public class NetworkManager : MonoBehaviour
     {
         // 1. Khởi tạo NetworkRunner
         _runner = gameObject.AddComponent<NetworkRunner>();
-        _runner.ProvideInput = true;
+       
 
         // 2. Lấy tên phòng, nếu để trống thì mặc định là "DevRoom"
-        string roomName = string.IsNullOrEmpty(roomInput.text) ? "DevRoom" : roomInput.text;
+        string roomName = (roomInput != null && !string.IsNullOrEmpty(roomInput.text)) ? roomInput.text : "DevRoom";
 
         // 3. Kết nối vào Photon Cloud và tải GameScene
         await _runner.StartGame(new StartGameArgs()

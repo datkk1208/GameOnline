@@ -10,12 +10,15 @@ public class HUDManager : MonoBehaviour
     public Slider healthBar;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
-
-    private void Awake()
+private void Awake()
+{
+    if (Instance != null && Instance != this)
     {
-        if (Instance == null)
-            Instance = this;
+        Destroy(gameObject);
+        return;
     }
+    Instance = this;
+}
 
     public void UpdateHealth(float health)
     {
