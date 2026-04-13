@@ -11,7 +11,7 @@ public class NetworkManager : MonoBehaviour
     {
         // 1. Khởi tạo NetworkRunner
         _runner = gameObject.AddComponent<NetworkRunner>();
-       
+
 
         // 2. Lấy tên phòng, nếu để trống thì mặc định là "DevRoom"
         string roomName = (roomInput != null && !string.IsNullOrEmpty(roomInput.text)) ? roomInput.text : "DevRoom";

@@ -52,12 +52,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 707994954400968502, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341821862111187457, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341821862111187457, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_Direction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341821862111187457, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5376129047794184600, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5376129047794184600, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5376129047794184600, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5572545892887907051, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
@@ -76,9 +96,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.09
       objectReference: {fileID: 0}
+    - target: {fileID: 7975693705743449445, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -9.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975693705743449445, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.84
+      objectReference: {fileID: 0}
     - target: {fileID: 9023162771492542226, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
       propertyPath: SortKey
       value: 4146124589
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023162771492542226, guid: efb6d39efd268574cae0d25a42cc28ea, type: 3}
+      propertyPath: NetworkedBehaviours.Array.size
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
