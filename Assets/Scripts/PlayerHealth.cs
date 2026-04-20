@@ -129,8 +129,17 @@ public class PlayerHealth : NetworkBehaviour
         IsDead = false;
         
         // Random dịch chuyển nhẹ tới điểm khác
-        Vector3 randomPos = new Vector3(Random.Range(-5f, 5f), 5f, Random.Range(-5f, 5f));
-        transform.position = randomPos;
+        Vector3 spawnPosition = new Vector3(Random.Range(-5f, 5f), 5f, Random.Range(-5f, 5f)); // Default fallback
+        PlayerSpawner spawner = UnityEngine.Object.FindFirstObjectByType<PlayerSpawner>();
+        if (spawner != null && spawner.spawnPoints != null && spawner.spawnPoints.Length > 0)
+        {
+            int randomIndex = Random.Range(0, spawner.spawnPoints.Length);
+            if (spawner.spawnPoints[randomIndex] != null)
+            {
+                spawnPosition = spawner.spawnPoints[randomIndex].position;
+            }
+        }
+        transform.position = spawnPosition;
 
         // Bật lại
         foreach (var mesh in meshParts) mesh.enabled = true;
